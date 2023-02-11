@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Earth Globe Visualization</title>
+  </head>
+  <body>
+    <h1>Earth Globe Visualization</h1>
+    <div id="globe-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r117/three.js"></script>
+    <script src="https://unpkg.com/@w3/3d-models@0.7.1/dist/w3-3d-models.min.js"></script>
+    <script>
+      // Load Earth model
+      const earth = new W3.Earth({
+        scale: 1,
+        rotate: true
+      });
+      earth.addTo(document.getElementById("globe-container"));
+    </script>
+    <script>
+      // Add data layer to Earth model
+      const dataLayer = new W3.DataLayer({
+        data: [
+          {lat: 37.7749, lng: -122.4194, value: 5},
+          {lat: 51.5074, lng: -0.1278, value: 8},
+          {lat: 40.7128, lng: -74.0060, value: 3}
+        ],
+        style: function (feature) {
+          return {
+            color: "red",
+            size: feature.value * 2
+          };
+        }
+      });
+      earth.addLayer(dataLayer);
+    </script>
+  </body>
+</html>
